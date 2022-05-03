@@ -36,7 +36,7 @@ graph LR;
 
 ### 实现
 
-#### 1.静态分配
+#### 1. [静态分配](./SequenceList1.c)
 
 ```c
 #define MaxSize 10
