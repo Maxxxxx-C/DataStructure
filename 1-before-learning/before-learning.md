@@ -128,9 +128,8 @@ graph LR;
 
 ## 算法的特性
 
-* ### 有穷性
-
-* ### 结果唯一性
+* 有穷性
+* 结果唯一性
 
 ## 复杂度
 
@@ -138,4 +137,28 @@ graph LR;
 
 a) 加法规则
 
-![公式一](https://latex.codecogs.com/svg.image?\LARGE&space;T(n)=T_{1}(n)&plus;T_{2}(n)=O(f(n))&plus;O(g(n))=O(max(f(n),g(n))))
+![公式一](https://latex.codecogs.com/svg.image?O(f(n))&plus;O(g(n))=O(max(f(n),g(n))))
+
+b) 乘法规则
+
+![公式二](https://latex.codecogs.com/svg.image?O(f(n))\times&space;O(g(n))=O(f(n)\times&space;g(n)))
+
+其中
+![公式三](https://latex.codecogs.com/svg.image?O(1)<O(log_{2}n)<O(n)<O(nlog_{2}n)<O(n^2)<O(n^3)<O(2^n)<O(n!)<O(n^n))
+
+同阶
+![公式三](https://latex.codecogs.com/svg.image?T(n)=O(f(n))\Leftrightarrow\displaystyle\lim_{x&space;\to&space;\infty}\frac{T(n)}{f(n)}=k)
+
+### 算法的效率
+
+```mermaid
+graph LR;
+    算法时间开销-->机器性能-->外部因素;
+    算法时间开销-->编程语言-->外部因素;
+    算法时间开销-->编译软件-->外部因素;
+    算法时间开销-->问题规模;
+```
+
+#### 时间复杂度
+
+事前预估算法**时间开销T(n)**与**问题规模n**的关系
