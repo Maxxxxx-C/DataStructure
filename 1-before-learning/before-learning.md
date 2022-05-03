@@ -134,4 +134,6 @@ graph LR;
 
 ## 复杂度
 
-![1](https://latex.codecogs.com/svg.image?\lim_{x\to0}f(x)=8)
+$$
+\int_a^bf(x)dx
+$$
