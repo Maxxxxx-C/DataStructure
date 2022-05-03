@@ -134,6 +134,8 @@ graph LR;
 
 ## 复杂度
 
-$$
-\int_a^bf(x)dx
-$$
+### 运算规则
+
+a) 加法规则
+
+![公式一](https://latex.codecogs.com/svg.image?\LARGE&space;T(n)=T_{1}(n)&plus;T_{2}(n)=O(f(n))&plus;O(g(n))=O(max(f(n),g(n))))
