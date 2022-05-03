@@ -144,9 +144,11 @@ b) 乘法规则
 ![公式二](https://latex.codecogs.com/svg.image?O(f(n))\times&space;O(g(n))=O(f(n)\times&space;g(n)))
 
 其中
+
 ![公式三](https://latex.codecogs.com/svg.image?O(1)<O(log_{2}n)<O(n)<O(nlog_{2}n)<O(n^2)<O(n^3)<O(2^n)<O(n!)<O(n^n))
 
 同阶
+
 ![公式三](https://latex.codecogs.com/svg.image?T(n)=O(f(n))\Leftrightarrow\displaystyle\lim_{x&space;\to&space;\infty}\frac{T(n)}{f(n)}=k)
 
 ### 算法的效率
