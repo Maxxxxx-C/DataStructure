@@ -127,6 +127,8 @@ graph TB;
 2. 化为线性形式；
 3. 数学归纳法证明。
 
+---
+
 **e.g.**
 
 ![记号](https://latex.codecogs.com/svg.image?T(n)=4T(n/2)&plus;n)
@@ -149,6 +151,8 @@ graph TB;
 
 **因此**，![记号](https://latex.codecogs.com/svg.image?T(n)=O(n^3))**成立**
 
+---
+
 虽然但是，![记号](https://latex.codecogs.com/svg.image?O(n^3))并不是该递归式中![记号](https://latex.codecogs.com/svg.image?T(n))的上确界，严格结果为![记号](https://latex.codecogs.com/svg.image?O(n^2))，下面给出证明
 
 **假设** ![记号](https://latex.codecogs.com/svg.image?T(n)=O(n^2))
@@ -166,6 +170,8 @@ graph TB;
 因此此时，![记号](https://latex.codecogs.com/svg.image?T(n)\leqslant&space;c_{1}n^2-c_{2}n)，假设成立
 
 **因此**，![记号](https://latex.codecogs.com/svg.image?T(n)=O(n^2))**成立**
+
+---
 
 #### 递归树法
 
@@ -200,6 +206,8 @@ graph TB;
 所以，![记号](https://latex.codecogs.com/svg.image?T(n)=\Omega(n^2))
 
 所以，![记号](https://latex.codecogs.com/svg.image?T(n)=\Theta(n^2))
+
+---
 
 #### 主方法
 
