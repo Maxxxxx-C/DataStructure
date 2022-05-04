@@ -59,9 +59,10 @@ e.g.
 ### 1.1.4 另一种排序方法
 
 归并排序，![公式](https://latex.codecogs.com/svg.image?A[1...n])
-1.如果n=1，排序结束  
-2.将序列分割为 ![公式](https://latex.codecogs.com/svg.image?A[1...\left\lceil\frac{n}{2}\right\rceil]) 和 ![公式](https://latex.codecogs.com/svg.image?A[\left\lceil\frac{n}{2}\right\rceil&plus;1...n]) 并分别归并排序  
-3.合并两个分割的序列
+
+1. 如果n=1，排序结束  
+2. 将序列分割为 ![公式](https://latex.codecogs.com/svg.image?A[1...\left\lceil\frac{n}{2}\right\rceil]) 和 ![公式](https://latex.codecogs.com/svg.image?A[\left\lceil\frac{n}{2}\right\rceil&plus;1...n]) 并分别归并排序  
+3. 合并两个分割的序列
 
 记整个归并排序时间复杂度为T(n)
 对于步骤一，只需判断1次，时间复杂度是常数级的 ![记号](https://latex.codecogs.com/svg.image?\Theta(1))
