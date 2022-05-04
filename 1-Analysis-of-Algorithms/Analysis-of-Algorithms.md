@@ -42,32 +42,32 @@ for j=2 to n
 
 ### 1.1.3 一个数学记号
 
-![记号](https://latex.codecogs.com/svg.image?\Theta) 记号：对于一个公式，舍去低阶项，并忽略常数因子
+$\Theta$记号：对于一个公式，舍去低阶项，并忽略常数因子
 
 e.g.
 
-![公式](https://latex.codecogs.com/svg.image?3n^3&plus;90n^2-5n&plus;6046=\Theta(n^3))
+$$3n^3+90n^2-5n+6046=\Theta(n^3)$$
 
-当n趋近于无穷时，![公式1](https://latex.codecogs.com/svg.image?\Theta(n^2))总是比![公式1](https://latex.codecogs.com/svg.image?\Theta(n^3))更快
+当$n$趋近于无穷时，$\Theta(n^2)$总是比$\Theta(n^3)$更快
 
 分析**插入排序的时间复杂度**
 
 `算术级数`
 
-![公式](https://latex.codecogs.com/svg.image?T(n)=\sum_{j=2}^{n}\Theta(j)=\Theta(n^2))
+$$T(n)=\sum_{j=2}^{n}\Theta(j)=\Theta(n^2)$$
 
 ### 1.1.4 另一种排序方法
 
-归并排序，![公式](https://latex.codecogs.com/svg.image?A[1...n])
+归并排序，$A[1...n]$
 
 1. 如果n=1，排序结束  
-2. 将序列分割为 ![公式](https://latex.codecogs.com/svg.image?A[1...\left\lceil\frac{n}{2}\right\rceil]) 和 ![公式](https://latex.codecogs.com/svg.image?A[\left\lceil\frac{n}{2}\right\rceil&plus;1...n]) 并分别归并排序  
+2. 将序列分割为$A[1...\left\lceil\frac{n}{2}\right\rceil]$和$A[\left\lceil\frac{n}{2}\right\rceil+1...n]$并分别归并排序  
 3. 合并两个分割的序列
 
 记整个归并排序时间复杂度为T(n)
-对于步骤一，只需判断1次，时间复杂度是常数级的 ![记号](https://latex.codecogs.com/svg.image?\Theta(1))
-对于步骤二，它总是分成2次输入规模为n/2的归并排序，因此时间复杂度为2T(n/2)
-对于步骤三，合并两个有序表的时间复杂度为 ![记号](https://latex.codecogs.com/svg.image?\Theta(n))
+对于步骤一，只需判断1次，时间复杂度是常数级的$\Theta(1)$
+对于步骤二，它总是分成2次输入规模为$n/2$的归并排序，因此时间复杂度为$2T(n/2)$
+对于步骤三，合并两个有序表的时间复杂度为$\Theta(n)$
 
 则针对归并排序的时间复杂度可列出方程
 
