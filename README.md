@@ -1,9 +1,9 @@
 
 数据结构与算法学习，持续更新中...
 
-参考书目为《算法导论》（第三版）
+参考书目为`《算法导论》（第三版）`
 
-每章节同级目录下有相应的代码实现
+每章节同级目录下有相应算法的C语言实现
 
 ## 阅前须知
 
@@ -13,6 +13,8 @@
 > [https://chrome.google.com/webstore/detail/mathjax-3-plugin-for-gith/peoghobgdhejhcmgoppjpjcidngdfkod](https://chrome.google.com/webstore/detail/mathjax-3-plugin-for-gith/peoghobgdhejhcmgoppjpjcidngdfkod)
 
 可能需要绿色上网，但你都能流畅使用github了
+
+或者你也可以下载下来再从装有 markdown 扩展的 vscode 打开，方法总比困难多
 
 ## 目录
 

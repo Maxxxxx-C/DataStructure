@@ -20,6 +20,30 @@ for j=2 to n
         A[i+1] = key
 ```
 
+[插入排序C语言实现](./insertion_sort.c)
+
+```c
+//插入排序一个数组，改变原数组
+void insertion_sort(DataType *array, int length) {
+    int i, j;
+    DataType key;
+    for (i = 1; i < length; i++) {
+        //key记录当前要插入的值
+        key = array[i];
+        for (j = i; j > -1; j--) {
+            //如果j为0或者前一位小于等于key，则将key插入到这一位
+            if (j == 0 || array[j - 1] <= key) {
+                array[j] = key;
+                break;
+            }   //如果前一位大于key，则将前一位往后移
+            else if (array[j - 1] > key) {
+                array[j] = array[j - 1];
+            }
+        }
+    }
+}
+```
+
 最好情况：完全顺序
 最坏情况：完全逆序
 
@@ -94,6 +118,76 @@ graph TB;
 因此最终结果为，
 
 $$T(n)=cn\log n+\Theta(n)=\Theta(n\log n)$$
+
+[归并排序C语言实现](./merge_sort.c)
+
+```c
+//归并排序一个数组，不破坏原数组，返回新数组
+DataType *merge_sort(const DataType *array, int length) {
+    int i;
+    //复制一份，防止破坏原数组
+    DataType *array_copy = (DataType *) malloc(length * sizeof(DataType));
+    for (i = 0; i < length; i++) {
+        array_copy[i] = array[i];
+    }
+    //如果长度为1，说明达到终止条件，直接返回复制后的数组
+    if (length == 1) {
+        return array_copy;
+    } else {    //递归主程序
+        int mid = length / 2;
+        //将原数组分割成array1和array2
+        DataType *array1 = (DataType *) malloc(mid * sizeof(DataType));
+        DataType *array2 = (DataType *) malloc((length - mid) * sizeof(DataType));
+        for (i = 0; i < mid; i++) {
+            array1[i] = array_copy[i];
+        }
+        for (i = mid; i < length; i++) {
+            array2[i - mid] = array_copy[i];
+        }
+        //对array1和array2进行分治排序（递归）
+        array1 = merge_sort(array1, mid);
+        array2 = merge_sort(array2, length - mid);
+        //有序合并两个数组
+        array_copy = merge(array1, array2, length);
+        //释放内存，节省空间
+        free(array1);
+        free(array2);
+        return array_copy;
+    }
+}
+```
+
+```c
+//有序合并两个数组
+DataType *merge(const DataType *array1, const DataType *array2, int length) {
+    DataType *array_merged = (DataType *) malloc(length * sizeof(DataType));
+    int pointer1 = 0, pointer2 = 0; //标志
+    int length1 = length / 2;       //数组1的长度
+    int length2 = length - length1; //数组2的长度
+    int i;
+    for (i = 0; i < length; i++) {
+        //两个数组的标志都为达到尽头
+        if (pointer1 != length1 && pointer2 != length2) {
+            if (array1[pointer1] <= array2[pointer2]) {
+                array_merged[i] = array1[pointer1];
+                pointer1++;
+            } else {
+                array_merged[i] = array2[pointer2];
+                pointer2++;
+            }
+        }   //数组1到达尽头，则将数组2剩下部分加到最终数组的后面
+        else if (pointer1 == length1) {
+            array_merged[i] = array2[pointer2];
+            pointer2++;
+        }   //数组2到达尽头，则将数组1剩下部分加到最终数组的后面
+        else if (pointer2 == length2) {
+            array_merged[i] = array1[pointer1];
+            pointer1++;
+        }
+    }
+    return array_merged;
+}
+```
 
 ## 1.2 渐进符号及递归计算
 
