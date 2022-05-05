@@ -244,7 +244,7 @@ $$\Rightarrow\quad T(n)=\Theta(n^{\log_{b}a}\log^{k+1}n)$$
 
 $$f(n)=\Omega(n^{\log_{b}a+\epsilon}),\,(\epsilon>0)$$
 
-$$\&\quad af(n/b)\leqslant(1-\epsilon')f(n),\,(\epsilon'>0)$$
+$$\And\quad af(n/b)\leqslant(1-\epsilon')f(n),\,(\epsilon'>0)$$
 
 $$\Rightarrow\quad T(n)=\Theta(f(n))$$
 
