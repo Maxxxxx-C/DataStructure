@@ -53,7 +53,11 @@
 
 斐波那契数列的数学定义就是递归的
 
-$$F(n)=\left\{\begin{array}{l}0,n=0&\\\\1,n=1\\\\F(n-1)+F(n-2),n\geqslant2\end{array}\right.$$
+$$F(n)=\left \{{\begin{array}{l}0,n=0&\\\\1,n=1\\\\F(n-1)+F(n-2),n\geqslant2\end{array}}\right.$$
+
+$$\left \{ F(n)=\begin{bmatrix}1 & 1\\\\1 & 1\end{bmatrix}^n \right \} $$
+
+`催更mathjax3扩展作者快快更新大括号的渲染`
 
 ![公式](https://latex.codecogs.com/svg.image?F(n)=\left\\{\begin{array}{l}0,\&space;n=0&space;\\\\1,\&space;n=1&space;\\\\F(n-1)&plus;F(n-2),\&space;n\geqslant2\end{array}\right.)
 
