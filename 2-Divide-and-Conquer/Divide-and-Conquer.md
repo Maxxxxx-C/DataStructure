@@ -53,7 +53,7 @@
 
 斐波那契数列的数学定义就是递归的
 
-$$F(n)=\left \\{{\begin{array}{l}0,n=0&\\\\1,n=1\\\\F(n-1)+F(n-2),n\geqslant2\\end{array}}\right.$$
+$$F(n)=\left \{{\begin{array}{l}0,n=0&\\\\1,n=1\\\\F(n-1)+F(n-2),n\geqslant2\end{array}}\right.$$
 
 $$\left \{ F(n)=\begin{bmatrix}1 & 1\\\\1 & 1\end{bmatrix}^n \right \} $$
 
