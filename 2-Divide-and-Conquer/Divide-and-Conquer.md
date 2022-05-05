@@ -89,4 +89,4 @@ $\left \lfloor \frac{\varphi ^n}{\sqrt{5} }  +\frac{1}{2} \right \rfloor $ 的�
 
 ### 1.2.4 另辟蹊径——矩阵平方递归式
 
-**定理一** $$F(n)=\begin{bmatrix}1&1\\1&1\end{bmatrix}^n$$
+**定理一** $$F(n)=\begin{bmatrix}1&1\\\\1&1\end{bmatrix}^n$$
