@@ -53,6 +53,8 @@
 
 斐波那契数列的数学定义就是递归的
 
+$$F(n)=\left\{\begin{array}{l}0,n=0&\\\\1,n=1\\\\F(n-1)+F(n-2),n\geqslant2\end{array}\right.$$
+
 ![公式](https://latex.codecogs.com/svg.image?F(n)=\left\\{\begin{array}{l}0,\&space;n=0&space;\\\\1,\&space;n=1&space;\\\\F(n-1)&plus;F(n-2),\&space;n\geqslant2\end{array}\right.)
 
 我们可以非常简单地从数学定义中得出递归表达式 $$T(n)=T(n-1)+T(n-2)+\Theta(1)$$
