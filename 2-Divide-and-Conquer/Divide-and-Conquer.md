@@ -85,10 +85,38 @@ $$F(n)=\left \lfloor \frac{\varphi ^n}{\sqrt{5} }  +\frac{1}{2} \right \rfloor $
 
 $\left \lfloor \frac{\varphi ^n}{\sqrt{5} }  +\frac{1}{2} \right \rfloor $ 的意思是最接近 $\frac{\varphi ^n}{\sqrt{5}}$ 的整数
 
-乘方算法的时间消耗为 $\Theta(\log n)$
+乘方递归的时间消耗为 $\Theta(\log n)$
 
 但是由于计算机在运算高精度数据过程中总是会丢失一些位，因此这个算法在计算机中难以实现，并且事实上，计算高精度浮点数的乘法并不是常数级的，因此实际计算的时间消耗总是要更久。
 
 ### 1.2.4 另辟蹊径——矩阵平方递归式
 
-**定理一** $$F(n)=\begin{bmatrix}1&1\\\\1&1\end{bmatrix}^n$$
+**定理一** $$\begin{bmatrix}F(n+1)&F(n)\\\\ F(n)&F(n-1)\end{bmatrix}=\begin{bmatrix}1&1\\\\1&0\end{bmatrix}^n$$
+
+乘方递归的时间消耗为 $\Theta(\log n)$
+
+---
+
+**数学归纳法**证明
+
+当 $n=1$ 时，$$\begin{bmatrix}F(2)&F(1)\\\\ F(1)&F(0)\end{bmatrix}=\begin{bmatrix}1&1\\\\1&0\end{bmatrix}^1$$显然成立
+
+假设 $$\begin{bmatrix}F(k+1)&F(k)\\\\ F(k)&F(k-1)\end{bmatrix}=\begin{bmatrix}1&1\\\\1&0\end{bmatrix}^k$$成立
+
+则对于 $k+1$ $$\begin{bmatrix}F(k+2)&F(k+1)\\\\ F(k+1)&F(k)\end{bmatrix}=\begin{bmatrix}1&1\\\\1&0\end{bmatrix}^{k+1}$$
+
+$$=\begin{bmatrix}F(k+1)&F(k)\\\\ F(k)&F(k-1)\end{bmatrix}\begin{bmatrix}1&1\\\\1&0\end{bmatrix}=\begin{bmatrix}F(k+1)+F(k)&F(k+1)\\\\ F(k)+F(k-1)&F(k)\end{bmatrix}$$
+
+显然成立
+
+因此 $$\begin{bmatrix}F(n+1)&F(n)\\\\ F(n)&F(n-1)\end{bmatrix}=\begin{bmatrix}1&1\\\\1&0\end{bmatrix}^n$$ 成立
+
+---
+
+两个 $2\times 2$ 的矩阵的乘法只需要 $12$ 次计算，是常数级的，因此整个算法的时间消耗为
+
+$$T(n)=\Theta(\log n)$$
+
+那对于一般的矩阵乘法，还是常数级的吗？
+
+## 1.3 矩阵乘法
