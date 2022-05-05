@@ -230,21 +230,21 @@ $$T(n)\leqslant\sum_{k=0}^{\log_{4}n}\frac{5^k}{16^k}n^2$$
 
 `情况一`
 
-$$f(n)=O(n^{\log_{b}a-\epsilon}),\,(\epsilon>0)$$
+$$f(n)=O(n^{\log_{b}a-\epsilon}),\ (\epsilon>0)$$
 
 $$\Rightarrow\quad T(n)=\Theta(n^{\log_{b}a})$$
 
 `情况二`
 
-$$f(n)=\Theta(n^{\log_{b}a}\log^k n),\,(k\geqslant0)$$
+$$f(n)=\Theta(n^{\log_{b}a}\log^k n),\ (k\geqslant0)$$
 
 $$\Rightarrow\quad T(n)=\Theta(n^{\log_{b}a}\log^{k+1}n)$$
 
 `情况三`
 
-$$f(n)=\Omega(n^{\log_{b}a+\epsilon}),\,(\epsilon>0)$$
+$$f(n)=\Omega(n^{\log_{b}a+\epsilon}),\ (\epsilon>0)$$
 
-$$\And\quad af(n/b)\leqslant(1-\epsilon')f(n),\,(\epsilon'>0)$$
+$$\And\quad af(n/b)\leqslant(1-\epsilon')f(n),\ (\epsilon'>0)$$
 
 $$\Rightarrow\quad T(n)=\Theta(f(n))$$
 
@@ -286,7 +286,7 @@ $$T(n)=4T(n/2)+n^3$$
 
 显然 $$f(n)=n^3=\Omega(n^2)$$
 
-并且 $$4f(n/2)=n^3/2\leqslant(1-\epsilon')f(n),\,(\epsilon>0)$$
+并且 $$4f(n/2)=n^3/2\leqslant(1-\epsilon')f(n),\ (\epsilon>0)$$
 
 `情况三`
 
