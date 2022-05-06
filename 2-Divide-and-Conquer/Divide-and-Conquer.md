@@ -285,17 +285,17 @@ $$c_{ij}=\sum_{k=1}^{r}a_{ik}b_{kj}$$
 
 将方阵 $\textbf{A}$、$\textbf{B}$ 和  $\textbf{C}$ 都分解为一个 $2\times2$ 的子矩阵，其中的每个元素都是矩阵，我们可以得到如下式子
 
-$\begin{bmatrix}\textbf{C}_{11}&\textbf{C}_{12}\\\\\textbf{C}_{21}&\textbf{C}_{22}\end{bmatrix}=\begin{bmatrix}\textbf{A}_{11}&\textbf{A}_{12}\\\\\textbf{A}_{21}&\textbf{A}_{22}\end{bmatrix}\times\begin{bmatrix}\textbf{B}_{11}&\textbf{B}_{12}\\\\\textbf{B}_{21}&\textbf{B}_{22}\end{bmatrix}$
+$$\begin{bmatrix}C_{11}&C_{12}\\\\C_{21}&C_{22}\end{bmatrix}=\begin{bmatrix}A_{11}&A_{12}\\\\A_{21}&A_{22}\end{bmatrix}\times\begin{bmatrix}B_{11}&B_{12}\\\\B_{21}&B_{22}\end{bmatrix}$$
 
 我们可以将问题转化为求
 
-$\textbf{C}_{11}=\textbf{A}_{11}\textbf{B}_{11}+\textbf{A}_{12}\textbf{B}_{21}$
+$$\textbf{C}_{11}=\textbf{A}_{11}\textbf{B}_{11}+\textbf{A}_{12}\textbf{B}_{21}$$
 
-$\textbf{C}_{12}=\textbf{A}_{11}\textbf{B}_{12}+\textbf{A}_{12}\textbf{B}_{22}$
+$$\textbf{C}_{12}=\textbf{A}_{11}\textbf{B}_{12}+\textbf{A}_{12}\textbf{B}_{22}$$
 
-$\textbf{C}_{21}=\textbf{A}_{21}\textbf{B}_{11}+\textbf{A}_{22}\textbf{B}_{21}$
+$$\textbf{C}_{21}=\textbf{A}_{21}\textbf{B}_{11}+\textbf{A}_{22}\textbf{B}_{21}$$
 
-$\textbf{C}_{22}=\textbf{A}_{21}\textbf{B}_{12}+\textbf{A}_{22}\textbf{B}_{22}$
+$$\textbf{C}_{22}=\textbf{A}_{21}\textbf{B}_{12}+\textbf{A}_{22}\textbf{B}_{22}$$
 
 每一个式子是 $2$ 次 $n/2\times n/2$ 的矩阵的乘法和 $1$ 次 $n/2\times n/2$ 矩阵的加法，一共有 $4$ 个式子。其中，$n/2\times n/2$ 的矩阵的乘法时间消耗为 $T(n/2)$，$n/2\times n/2$ 矩阵的加法时间消耗为 $\Theta(n^2)$
 
