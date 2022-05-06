@@ -9,6 +9,8 @@
 2. **递归**：递归地解决所有子问题
 3. **合并**：合并所有子问题
 
+> 虽然分治法是递归的，但并不意味着实际代码的实现必须使用递归
+
 ### 1.1.2 复习归并排序
 
 1. 将数组分成左半部分和右半部分；
@@ -35,6 +37,28 @@
 
 易得 $$T(n)=\Theta(\log n)$$
 
+**[递归型二分查找C语言实现](./binary_search.c)**
+
+```c
+//二分查找一个数在序列中的位置，存在则返回该元素的下标，如果不存在返回-1
+int binary_search(DataType array[], int start, int end, DataType value) {
+    int key = -1;
+    int length = end - start + 1;
+    int mid = (end + start) / 2;
+    //长度为2时表示剩余只有两个元素，两边一定都找过了，递归结束，该数并不在序列中
+    if(length != 2){
+        if (value == array[mid]) {
+            key = mid;
+        } else if (value < array[mid]) {
+            key = binary_search(array, start, mid, value);
+        } else if (value > array[mid]) {
+            key = binary_search(array, mid, end, value);
+        }
+    }
+    return key;
+}
+```
+
 ### 1.1.4 乘方问题
 
 给一个有理数 $x$，和一个非负整数 $n$，求 $x^n$
@@ -46,6 +70,26 @@
 归并排序的时间复杂度的递归表达式为 $$T(n)=T(n/2)+\Theta(1)$$
 
 易得 $$T(n)=\Theta(\log n)$$
+
+**[乘方分治法C语言实现](./power.c)**
+
+```c
+//分治法求乘方
+DataType recursive_pow(DataType base, int power) {
+    DataType medium;
+    DataType result = base;
+    if (power != 1) {
+        if (power % 2 == 0) {
+            medium = recursive_pow(base, power / 2);
+            result = medium * medium;
+        } else if (power % 2 == 1) {
+            medium = recursive_pow(base, (power - 1) / 2);
+            result = medium * medium * base;
+        }
+    }
+    return result;
+}
+```
 
 ## 1.2 斐波那契数列 (Fibonacci sequence)
 
@@ -63,6 +107,22 @@
 
 我们发现，此时使用分治法的效果似乎并不太行儿，原因是我们在分解的步骤中，两个子问题的子问题出现了重复，导致我们做了大量的非必要重复计算。分治法的精髓在于减小问题的规模，而我们在这里却增大了问题的规模。
 
+**[糟糕的斐波那契数列算法](./poor_fibonacci.c)**
+
+```c
+long poor_fibonacci(int n) {
+    long result = 0;
+    if (n != 0 && n != 1) {
+        result = poor_fibonacci(n - 1) + poor_fibonacci(n - 2);
+    } else if (n == 1) {
+        result = 1;
+    } else {
+        result = 0;
+    }
+    return result;
+}
+```
+
 `我们想要多项式时间的算法。`
 
 ### 1.2.2 更好的算法——自下而上的解法
@@ -75,7 +135,32 @@
 
 因此这个算法的时间消耗为 $$T(n)=\Theta(n)$$
 
-这是我们能达到的最好状态吗？
+**[自下而上的斐波那契数列算法](./dynamic_fibonacci.c)**
+
+```c
+//动态规划的思想，自上而下地求出斐波那契数
+long dynamic_fibonacci(int n) {
+    long result = 1;
+    if (n != 0 && n != 1) {
+        int key;
+        long tmp;
+        long pre_pre_number = 0;
+        long pre_number = 1;
+        
+        for (key = 1; key != n; key++) {
+            result = pre_number + pre_pre_number;
+            tmp = result;
+            pre_pre_number = pre_number;
+            pre_number = tmp;
+        }
+    } else if (n == 1) {
+        result = 1;
+    } else {
+        result = 0;
+    }
+    return result;
+}
+```
 
 ### 1.2.3 最快的算法——朴素平方递归式（计算机难以实现）
 
@@ -117,6 +202,59 @@ $$=\begin{bmatrix}F(k+1)&F(k)\\\\ F(k)&F(k-1)\end{bmatrix}\begin{bmatrix}1&1\\\\
 
 $$T(n)=\Theta(\log n)$$
 
-那对于一般的矩阵乘法，还是常数级的吗？
+**[使用矩阵乘方的斐波那契数列算法](./matrix_power_fibonacci.c)**
+
+```c
+//利用斐波那契数列的矩阵表达式，二分地求出斐波那契数
+long matrix_power_fibonacci(int n) {
+    long **result_matrix = (long **) malloc(2 * sizeof(long *));
+    int i;
+    for (i = 0; i < 2; i++) {
+        result_matrix[i] = (long *) malloc(2 * sizeof(long));
+    }
+    result_matrix[0][0] = 1;
+    result_matrix[0][1] = 1;
+    result_matrix[1][0] = 1;
+    result_matrix[1][1] = 0;
+    result_matrix = matrix_pow(result_matrix, n);
+    return result_matrix[0][1];
+}
+```
+
+```c
+//矩阵乘方
+long **matrix_pow(long **base_matrix, int power){
+    long **medium;
+    long **result = base_matrix;
+    if (power != 1) {
+        if (power % 2 == 0) {
+            medium = matrix_pow(base_matrix, power / 2);
+            result = two_by_two_matrix_multiple(medium, medium);
+        } else if (power % 2 == 1) {
+            medium = matrix_pow(base_matrix, (power - 1) / 2);
+            result = two_by_two_matrix_multiple(two_by_two_matrix_multiple(medium, medium), base_matrix);
+        }
+    }
+    return result;
+}
+```
+
+```c
+//2X2的矩阵乘法
+long **two_by_two_matrix_multiple(long **matrix1, long **matrix2) {
+    long **result = (long **) malloc(2 * sizeof(long *));
+    int i;
+    for (i = 0; i < 2; i++) {
+        result[i] = (long *) malloc(2 * sizeof(long));
+    }
+    result[0][0] = matrix1[0][0] * matrix2[0][0] + matrix1[0][1] * matrix2[1][0];
+    result[0][1] = matrix1[0][0] * matrix2[0][1] + matrix1[0][1] * matrix2[1][1];
+    result[1][0] = matrix1[1][0] * matrix2[0][0] + matrix1[1][1] * matrix2[1][0];
+    result[1][1] = matrix1[1][0] * matrix2[0][1] + matrix1[1][1] * matrix2[1][1];
+    return result;
+}
+```
+
+那对于一般的矩阵乘法，时间消耗还是常数级的吗？
 
 ## 1.3 矩阵乘法

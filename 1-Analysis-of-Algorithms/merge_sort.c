@@ -7,12 +7,12 @@
 
 typedef double DataType;
 
-DataType *merge_sort(const DataType *array, int length);
+DataType *merge_sort(const DataType array[], int length);
 
-DataType *merge(const DataType *array1, const DataType *array2, int length);
+DataType *merge(const DataType array1[], const DataType array2[], int length);
 
 //归并排序一个数组，不破坏原数组，返回新数组
-DataType *merge_sort(const DataType *array, int length) {
+DataType *merge_sort(const DataType array[], int length) {
     int i;
     //复制一份，防止破坏原数组
     DataType *array_copy = (DataType *) malloc(length * sizeof(DataType));
@@ -46,7 +46,7 @@ DataType *merge_sort(const DataType *array, int length) {
 }
 
 //有序合并两个数组
-DataType *merge(const DataType *array1, const DataType *array2, int length) {
+DataType *merge(const DataType array1[], const DataType array2[], int length) {
     DataType *array_merged = (DataType *) malloc(length * sizeof(DataType));
     int pointer1 = 0, pointer2 = 0; //标志
     int length1 = length / 2;       //数组1的长度

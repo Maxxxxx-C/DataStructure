@@ -20,11 +20,11 @@ for j=2 to n
         A[i+1] = key
 ```
 
-[插入排序C语言实现](./insertion_sort.c)
+**[插入排序C语言实现](./insertion_sort.c)**
 
 ```c
 //插入排序一个数组，改变原数组
-void insertion_sort(DataType *array, int length) {
+void insertion_sort(DataType array[], int length) {
     int i, j;
     DataType key;
     for (i = 1; i < length; i++) {
@@ -45,6 +45,7 @@ void insertion_sort(DataType *array, int length) {
 ```
 
 最好情况：完全顺序
+
 最坏情况：完全逆序
 
 我们通常关注最坏情况下的运行时间，记 $T(n)$为在输入规模 $n$ 之下的最长的时间消耗。  
@@ -119,11 +120,11 @@ graph TB;
 
 $$T(n)=cn\log n+\Theta(n)=\Theta(n\log n)$$
 
-[归并排序C语言实现](./merge_sort.c)
+**[归并排序C语言实现](./merge_sort.c)**
 
 ```c
 //归并排序一个数组，不破坏原数组，返回新数组
-DataType *merge_sort(const DataType *array, int length) {
+DataType *merge_sort(const DataType array[], int length) {
     int i;
     //复制一份，防止破坏原数组
     DataType *array_copy = (DataType *) malloc(length * sizeof(DataType));
@@ -159,7 +160,7 @@ DataType *merge_sort(const DataType *array, int length) {
 
 ```c
 //有序合并两个数组
-DataType *merge(const DataType *array1, const DataType *array2, int length) {
+DataType *merge(const DataType array1[], const DataType array2[], int length) {
     DataType *array_merged = (DataType *) malloc(length * sizeof(DataType));
     int pointer1 = 0, pointer2 = 0; //标志
     int length1 = length / 2;       //数组1的长度

@@ -7,7 +7,7 @@
 typedef double DataType;
 
 //插入排序一个数组，改变原数组
-void insertion_sort(DataType *array, int length) {
+void insertion_sort(DataType array[], int length) {
     int i, j;
     DataType key;
     for (i = 1; i < length; i++) {
