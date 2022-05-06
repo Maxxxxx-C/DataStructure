@@ -283,7 +283,9 @@ $$c_{ij}=\sum_{k=1}^{r}a_{ik}b_{kj}$$
 
 ### 1.3.2 一个简单的分治算法
 
-将方阵 $\textbf{A}$、$\textbf{B}$ 和  $\textbf{C}$ 都分解为一个 $2\times2$ 的子矩阵，其中的每个元素都是矩阵，我们可以得到如下式子$$\begin{bmatrix}\textbf{C}_{11}&\textbf{C}_{12}\\\\\textbf{C}_{21}&\textbf{C}_{22}\end{bmatrix}=\begin{bmatrix}\textbf{A}_{11}&\textbf{A}_{12}\\\\\textbf{A}_{21}&\textbf{A}_{22}\end{bmatrix}\times\begin{bmatrix}\textbf{B}_{11}&\textbf{B}_{12}\\\\\textbf{B}_{21}&\textbf{B}_{22}\end{bmatrix}$$
+将方阵 $\textbf{A}$、$\textbf{B}$ 和  $\textbf{C}$ 都分解为一个 $2\times2$ 的子矩阵，其中的每个元素都是矩阵，我们可以得到如下式子
+
+$$\begin{bmatrix}\textbf{C}_{11}&\textbf{C}_{12}\\\\\textbf{C}_{21}&\textbf{C}_{22}\end{bmatrix}=\begin{bmatrix}\textbf{A}_{11}&\textbf{A}_{12}\\\\\textbf{A}_{21}&\textbf{A}_{22}\end{bmatrix}\times\begin{bmatrix}\textbf{B}_{11}&\textbf{B}_{12}\\\\\textbf{B}_{21}&\textbf{B}_{22}\end{bmatrix}$$
 
 我们可以将问题转化为求
 
