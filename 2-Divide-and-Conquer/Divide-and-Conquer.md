@@ -258,3 +258,141 @@ long **two_by_two_matrix_multiple(long **matrix1, long **matrix2) {
 那对于一般的矩阵乘法，时间消耗还是常数级的吗？
 
 ## 1.3 矩阵乘法
+
+### 1.3.1 基本概念
+
+由 $m\times n$ 个数排成的 $m$ 行 $n$ 列的数表称为 $m$ 行 $n$ 列的矩阵，简称 $m\times n$ 矩阵。记作：$$\textbf{A}=\begin{bmatrix}a_{11}&a_{12}&...&a_{1n}\\\\ a_{21}&a_{22}&...&a_{2n}\\\\...& ...& ...&...\\\\ a_{m1}&a_{m2}&...&a_{mn}\end{bmatrix}$$
+
+记第 $i$ 行，第 $j$ 列的元素为 $a_{ij}$
+
+#### 矩阵的和
+
+若存在两个 $m\times n$ 的矩阵 $\textbf{A}$ 和 $\textbf{B}$，则记矩阵 $\textbf{A}$ 和矩阵 $\textbf{B}$ 的和为 $m\times n$ 的矩阵 $\textbf{C}$，其中
+
+$$c_{ij}=a_{ij}+b_{ij}$$
+
+考虑两个 $n\times n$ 的方阵 $\textbf{A}$ 和 $\textbf{B}$，计算它们的和。计算每一个元素需要 $1$ 次加法，一共要计算 $n^2$ 个元素，因此总的时间消耗为 $$T(n)=\Theta(n^2)$$
+
+#### 矩阵的积
+
+若存在一个 $m\times r$ 的矩阵 $\textbf{A}$ 和一个 $r\times n$ 的矩阵 $\textbf{B}$，则记矩阵 $\textbf{A}$ 和矩阵 $\textbf{B}$ 的乘积为 $m\times n$ 的矩阵 $\textbf{C}$，其中
+
+$$c_{ij}=\sum_{k=1}^{r}a_{ik}b_{kj}$$
+
+考虑两个 $n\times n$ 的方阵 $\textbf{A}$ 和 $\textbf{B}$，计算它们的乘积。计算每一个元素需要 $n$ 次乘法和 $n-1$ 次加法，一共要计算 $n^2$ 个元素，因此总的时间消耗为 $$T(n)=\Theta(n^3)$$
+
+### 1.3.2 一个简单的分治算法
+
+将方阵 $\textbf{A}$、$\textbf{B}$ 和  $\textbf{C}$ 都分解为一个 $2\times2$ 的子矩阵，其中的每个元素都是矩阵，我们可以得到如下式子$$\begin{bmatrix}\textbf{C}_{11}&\textbf{C}_{12}\\\\\textbf{C}_{21}&\textbf{C}_{22}\end{bmatrix}=\begin{bmatrix}\textbf{A}_{11}&\textbf{A}_{12}\\\\\textbf{A}_{21}&\textbf{A}_{22}\end{bmatrix}\times\begin{bmatrix}\textbf{B}_{11}&\textbf{B}_{12}\\\\\textbf{B}_{21}&\textbf{B}_{22}\end{bmatrix}$$
+
+我们可以将问题转化为求
+
+$$\textbf{C}_{11}=\textbf{A}_{11}\textbf{B}_{11}+\textbf{A}_{12}\textbf{B}_{21}$$
+
+$$\textbf{C}_{12}=\textbf{A}_{11}\textbf{B}_{12}+\textbf{A}_{12}\textbf{B}_{22}$$
+
+$$\textbf{C}_{21}=\textbf{A}_{21}\textbf{B}_{11}+\textbf{A}_{22}\textbf{B}_{21}$$
+
+$$\textbf{C}_{22}=\textbf{A}_{21}\textbf{B}_{12}+\textbf{A}_{22}\textbf{B}_{22}$$
+
+每一个式子是 $2$ 次 $n/2\times n/2$ 的矩阵的乘法和 $1$ 次 $n/2\times n/2$ 矩阵的加法，一共有 $4$ 个式子。其中，$n/2\times n/2$ 的矩阵的乘法时间消耗为 $T(n/2)$，$n/2\times n/2$ 矩阵的加法时间消耗为 $\Theta(n^2)$
+
+因此可以得出递归表达式 $$T(n)=8T(n/2)+\Theta(n^2)$$
+
+依靠主方法可以得出 $$T(n)=\Theta(n^3)$$
+
+这并不比前面的算法更优秀
+
+### 1.3.3 Strassen 算法
+
+矩阵的乘法需要 $\Theta(n^3)$ 的时间，而加法只需要 $\Theta(n^2)$，因此我们想办法避开乘法而使用加法。Strassen 算法成功地将前面的 $8$ 次乘法减少到了 $7$ 次，这使我们的算法会更快一些。
+
+我们构造这样7个矩阵
+
+$$\textbf{P}_{1}=\textbf{A}_{11}(\textbf{B}_{12}-\textbf{B}_{22})$$
+
+$$\textbf{P}_{2}=(\textbf{A}_{11}+\textbf{A}_{12})\textbf{B}_{22}$$
+
+$$\textbf{P}_{3}=(\textbf{A}_{21}+\textbf{A}_{22})\textbf{B}_{11}$$
+
+$$\textbf{P}_{4}=\textbf{A}_{22}(\textbf{B}_{21}-\textbf{B}_{11})$$
+
+$$\textbf{P}_{5}=(\textbf{A}_{11}+\textbf{A}_{22})(\textbf{B}_{11}+\textbf{B}_{22})$$
+
+$$\textbf{P}_{6}=(\textbf{A}_{11}+\textbf{A}_{22})(\textbf{B}_{21}+\textbf{B}_{22})$$
+
+$$\textbf{P}_{7}=(\textbf{A}_{11}-\textbf{A}_{21})(\textbf{B}_{11}+\textbf{B}_{12})$$
+
+构造这7个矩阵总共需要10次加法和7次乘法
+
+我们尝试通过上面的7个矩阵，构造矩阵 $\textbf{C}$
+
+$$\textbf{C}_{11}=\textbf{P}_{4}+\textbf{P}_{5}+\textbf{P}_{6}-\textbf{P}_{2}$$
+
+$$\textbf{C}_{12}=\textbf{P}_{1}+\textbf{P}_{2}$$
+
+$$\textbf{C}_{21}=\textbf{P}_{3}+\textbf{P}_{4}$$
+
+$$\textbf{C}_{22}=\textbf{P}_{5}-\textbf{P}_{1}-\textbf{P}_{3}-\textbf{P}_{7}$$
+
+这样，我们就成功地通过20次加法和7次乘法，将矩阵 $\textbf{A}$ 和 $\textbf{B}$ 变成了矩阵 $\textbf{C}$
+
+再根据上面的分析，可以得出此时的递归表达式为 $$T(n)=7T(n/2)+\Theta(n^2)$$
+
+结果为 $$T(n)=\Theta(n^{\log7})\approx\Theta(n^{2.81})$$
+
+我们成功地提高了矩阵乘法的速度，不过目前最快的矩阵乘法算法的速度达到了 $\Theta(n^{2.376})$，虽然纯粹是理论上的改进。
+
+## 1.4 超大规模集成电路（Very Large-Scale Integration）
+
+### 1.4.1 概述
+
+我们假设电路是一个二叉树（binary tree），假设现在有一个完全二叉树，这个二叉树有n个叶节点，我们想将它放在芯片布局上，并占据最小空间。
+
+这个问题严格上来说不是一个算法问题，但我们可以从中体会到`分治法`的运用。
+
+### 1.4.2 朴素布局
+
+我们尝试直接将二叉树竖着排列下来
+
+```mermaid
+graph TB;
+    id1["p"]-->id2["p"]-->id4["p"];
+    id2["p"]-->id5["p"];
+    id1["p"]-->id3["p"]-->id6["p"];
+    id3["p"]-->id7["p"];
+```
+
+我们记树的高度为 $H(n)$，树的宽度为 $W(n)$
+
+将树都看成左右两颗子树加上根节点，并递归地看待所有子树，这样我们便能得到两个递归式
+
+$$T(n)=T(n/2)+\Theta(1)$$
+
+$$W(n)=2W(n/2)+\Theta(1)$$
+
+简单地解得
+
+$$T(n)=\Theta(\log n),\ W(n)=\Theta(n)$$
+
+这样我们就能得到所占用的面积
+
+$$S(n)=T(n)W(n)=\Theta(n\log n)$$
+
+### 1.4.3 H布局法
+
+![图片](../static/img/2_4_3.png)
+
+使用这种布局，我们就拥有了4个一样的子问题，事实上，当我们考虑高度时，只需要讨论2个子问题，同样的，当我们考虑宽度时，也只需要讨论2个子问题。这样我们就得到了两个递归式
+
+$$T(n)=2T(n/4)+\Theta(1)$$
+
+$$W(n)=2W(n/4)+\Theta(1)$$
+
+简单地解得
+
+$$T(n)=\Theta(\sqrt{n}),\ W(n)=\Theta(\sqrt{n})$$
+
+因此这种方法所占用的面积为
+
+$$S(n)=T(n)W(n)=\Theta(n)$$
