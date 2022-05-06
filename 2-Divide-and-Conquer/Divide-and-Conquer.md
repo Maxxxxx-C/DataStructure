@@ -261,7 +261,7 @@ long **two_by_two_matrix_multiple(long **matrix1, long **matrix2) {
 
 ### 1.3.1 基本概念
 
-由 $m\times n$ 个数排成的 $m$ 行 $n$ 列的数表称为 $m$ 行 $n$ 列的矩阵，简称 $m\times n$ 矩阵。记作：$$\textbf{A}=\begin{bmatrix}a_{11}&a_{12}&...&a_{1n}\\\\ a_{21}&a_{22}&...&a_{2n}\\\\...& ...& ...&...\\\\ a_{m1}&a_{m2}&...&a_{mn}\end{bmatrix}$$
+由 $m\times n$ 个数排成的 $m$ 行 $n$ 列的数表称为 $m$ 行 $n$ 列的矩阵，简称 $m\times n$ 矩阵。记作：$$A=\begin{bmatrix}a_{11}&a_{12}&...&a_{1n}\\\\ a_{21}&a_{22}&...&a_{2n}\\\\...& ...& ...&...\\\\ a_{m1}&a_{m2}&...&a_{mn}\end{bmatrix}$$
 
 记第 $i$ 行，第 $j$ 列的元素为 $a_{ij}$
 
@@ -283,19 +283,19 @@ $$c_{ij}=\sum_{k=1}^{r}a_{ik}b_{kj}$$
 
 ### 1.3.2 一个简单的分治算法
 
-将方阵 $\textbf{A}$、$\textbf{B}$ 和  $\textbf{C}$ 都分解为一个 $2\times2$ 的子矩阵，其中的每个元素都是矩阵，我们可以得到如下式子
+将方阵 $\textbf{A}$、$\textbf{B}$ 和 $\textbf{C}$ 都分解为一个 $2\times2$ 的子矩阵，其中的每个元素都是矩阵，我们可以得到如下式子
 
 $$\begin{bmatrix}C_{11}&C_{12}\\\\C_{21}&C_{22}\end{bmatrix}=\begin{bmatrix}A_{11}&A_{12}\\\\A_{21}&A_{22}\end{bmatrix}\times\begin{bmatrix}B_{11}&B_{12}\\\\B_{21}&B_{22}\end{bmatrix}$$
 
 我们可以将问题转化为求
 
-$$\textbf{C}_{11}=\textbf{A}_{11}\textbf{B}_{11}+\textbf{A}_{12}\textbf{B}_{21}$$
+$$C_{11}=A_{11}B_{11}+A_{12}B_{21}$$
 
-$$\textbf{C}_{12}=\textbf{A}_{11}\textbf{B}_{12}+\textbf{A}_{12}\textbf{B}_{22}$$
+$$C_{12}=A_{11}B_{12}+A_{12}B_{22}$$
 
-$$\textbf{C}_{21}=\textbf{A}_{21}\textbf{B}_{11}+\textbf{A}_{22}\textbf{B}_{21}$$
+$$C_{21}=A_{21}B_{11}+A_{22}B_{21}$$
 
-$$\textbf{C}_{22}=\textbf{A}_{21}\textbf{B}_{12}+\textbf{A}_{22}\textbf{B}_{22}$$
+$$C_{22}=A_{21}B_{12}+A_{22}B_{22}$$
 
 每一个式子是 $2$ 次 $n/2\times n/2$ 的矩阵的乘法和 $1$ 次 $n/2\times n/2$ 矩阵的加法，一共有 $4$ 个式子。其中，$n/2\times n/2$ 的矩阵的乘法时间消耗为 $T(n/2)$，$n/2\times n/2$ 矩阵的加法时间消耗为 $\Theta(n^2)$
 
@@ -311,31 +311,31 @@ $$\textbf{C}_{22}=\textbf{A}_{21}\textbf{B}_{12}+\textbf{A}_{22}\textbf{B}_{22}$
 
 我们构造这样7个矩阵
 
-$$\textbf{P}_{1}=\textbf{A}_{11}(\textbf{B}_{12}-\textbf{B}_{22})$$
+$$P_{1}=A_{11}(B_{12}-B_{22})$$
 
-$$\textbf{P}_{2}=(\textbf{A}_{11}+\textbf{A}_{12})\textbf{B}_{22}$$
+$$P_{2}=(A_{11}+A_{12})B_{22}$$
 
-$$\textbf{P}_{3}=(\textbf{A}_{21}+\textbf{A}_{22})\textbf{B}_{11}$$
+$$P_{3}=(A_{21}+A_{22})B_{11}$$
 
-$$\textbf{P}_{4}=\textbf{A}_{22}(\textbf{B}_{21}-\textbf{B}_{11})$$
+$$P_{4}=A_{22}(B_{21}-B_{11})$$
 
-$$\textbf{P}_{5}=(\textbf{A}_{11}+\textbf{A}_{22})(\textbf{B}_{11}+\textbf{B}_{22})$$
+$$P_{5}=(A_{11}+A_{22})(B_{11}+B_{22})$$
 
-$$\textbf{P}_{6}=(\textbf{A}_{11}+\textbf{A}_{22})(\textbf{B}_{21}+\textbf{B}_{22})$$
+$$P_{6}=(A_{11}+A_{22})(B_{21}+B_{22})$$
 
-$$\textbf{P}_{7}=(\textbf{A}_{11}-\textbf{A}_{21})(\textbf{B}_{11}+\textbf{B}_{12})$$
+$$P_{7}=(A_{11}-A_{21})(B_{11}+B_{12})$$
 
 构造这7个矩阵总共需要10次加法和7次乘法
 
 我们尝试通过上面的7个矩阵，构造矩阵 $\textbf{C}$
 
-$$\textbf{C}_{11}=\textbf{P}_{4}+\textbf{P}_{5}+\textbf{P}_{6}-\textbf{P}_{2}$$
+$$C_{11}=P_{4}+P_{5}+P_{6}-P_{2}$$
 
-$$\textbf{C}_{12}=\textbf{P}_{1}+\textbf{P}_{2}$$
+$$C_{12}=P_{1}+P_{2}$$
 
-$$\textbf{C}_{21}=\textbf{P}_{3}+\textbf{P}_{4}$$
+$$C_{21}=P_{3}+P_{4}$$
 
-$$\textbf{C}_{22}=\textbf{P}_{5}-\textbf{P}_{1}-\textbf{P}_{3}-\textbf{P}_{7}$$
+$$C_{22}=P_{5}-P_{1}-P_{3}-P_{7}$$
 
 这样，我们就成功地通过20次加法和7次乘法，将矩阵 $\textbf{A}$ 和 $\textbf{B}$ 变成了矩阵 $\textbf{C}$
 

@@ -10,7 +10,12 @@
 
 > [https://chrome.google.com/webstore/detail/mathjax-3-plugin-for-gith/peoghobgdhejhcmgoppjpjcidngdfkod](https://chrome.google.com/webstore/detail/mathjax-3-plugin-for-gith/peoghobgdhejhcmgoppjpjcidngdfkod)
 
-可能需要绿色上网，但你都能流畅使用github了
+该插件还存在一些问题，包括不限于
+
+1. 左大括号无法正常显示，其他类似的还没有测试过，目前采用嵌入图片链接的方式解决
+2. 粗体 \textbf{A}和下标_{ij} 在一起时（渲染结果为粗体，表示矩阵），无法正确渲染，目前采用的解决方法是摆烂不解决，较长的矩阵公式中不用粗体表示矩阵
+
+下载该插件可能需要绿色上网，但你都能流畅使用github了
 
 或者你也可以下载下来再从装有 markdown 扩展的 vscode 打开，方法总比困难多
 
