@@ -25,4 +25,4 @@
 
 * ### [分治法](./2-Divide-and-Conquer/Divide-and-Conquer.md)
 
-* ### [快速排序与随机化算法](./3-Quick-Sort-and-Randomization-Algorithms/Quick-Sort-and-Randomization-Algorithms.md)
+* ### [排序](./3-Sort/Sort.md)
