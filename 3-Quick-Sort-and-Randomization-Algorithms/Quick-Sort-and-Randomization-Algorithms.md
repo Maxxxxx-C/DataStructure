@@ -145,7 +145,7 @@ Randomized_Partition(A, p, r)
 
 `随机变量的期望值`
 
-$$E[X]=\sum_{x}x\bullet \Pr \{X=x\} $$
+$$E[X]=\sum_{x}x\bullet \Pr \\{X=x\\} $$
 
 ---
 
