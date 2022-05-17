@@ -76,12 +76,20 @@ DataType *merge(const DataType array1[], const DataType array2[], int length) {
 }
 
 static void test() {
-    DataType test_array[10] = {5.4, -6.39, 8.65, 1.45, 63.9, 0.123, -5.269};
-    DataType *new_array = (DataType *) malloc(10 * sizeof(DataType));
-    new_array = merge_sort(test_array, 7);
+    DataType test_array[50] = {-36.369, 85.803, -167.095, -110.182, 76.797, 196.661, 111.586, -162.629, -186.281,
+                               -99.451, 23.562, -175.460, -30.084, 66.448, -99.617, 188.470, -85.186, 17.844, 189.978,
+                               -154.840, 45.021, -134.597, 144.222, -15.050, -93.513, 134.867, -73.930, 137.829,
+                               -112.125, 178.082, 192.470, -158.801, 69.293, 69.950, 37.793, 28.266, 12.389, -141.038,
+                               15.295, 68.120, -8.053, 134.254, -101.804, 80.599, -93.530, -49.859, -109.548, -96.868,
+                               87.334, -100.866};
+    DataType *new_array = (DataType *) malloc(50 * sizeof(DataType));
+    new_array = merge_sort(test_array, 50);
 
     int i;
-    for (i = 0; i < 7; i++) {
+    for (i = 0; i < 50; i++) {
+        if (i != 0 && i % 10 == 0) {
+            printf("\n");
+        }
         printf("%.3f, ", new_array[i]);
     }
 

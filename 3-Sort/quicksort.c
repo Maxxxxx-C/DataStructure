@@ -1,29 +1,42 @@
 /*
- * 插入排序(Insertion Sort)
+ * 插入排序(Quicksort)
  * */
 
 #include "stdio.h"
 
 typedef double DataType;
 
-//插入排序一个数组，改变原数组
-void insertion_sort(DataType array[], int length) {
-    int i, j;
-    DataType key;
-    for (i = 1; i < length; i++) {
-        //key记录当前要插入的值
-        key = array[i];
-        for (j = i; j > -1; j--) {
-            //如果j为0或者前一位小于等于key，则将key插入到这一位
-            if (j == 0 || array[j - 1] <= key) {
-                array[j] = key;
-                break;
-            }   //如果前一位大于key，则将前一位往后移
-            else if (array[j - 1] > key) {
-                array[j] = array[j - 1];
-            }
+void quicksort(DataType array[], int s, int e);
+
+int partition(DataType array[], int s, int e);
+
+//改变原数组，参数：array（原数组），s（start），e（end）
+void quicksort(DataType array[], int s, int e) {
+    if (s < e) {
+        int m = partition(array, s, e);
+        quicksort(array, s, m - 1);
+        quicksort(array, m + 1, e);
+    }
+}
+
+// 选择第一个元素为主元，将小于等于主元的放到主元左边，其余放到右边
+int partition(DataType array[], int s, int e) {
+    DataType key = array[s];
+    int i = s;
+    DataType tmp;
+    int j;
+    for (j = i + 1; j <= e; j++) {
+        if (array[j] <= key) {
+            tmp = array[j];
+            array[j] = array[i + 1];
+            array[i + 1] = tmp;
+            i++;
         }
     }
+    tmp = array[s];
+    array[s] = array[i];
+    array[i] = tmp;
+    return i;
 }
 
 static void test() {
@@ -33,7 +46,7 @@ static void test() {
                                -112.125, 178.082, 192.470, -158.801, 69.293, 69.950, 37.793, 28.266, 12.389, -141.038,
                                15.295, 68.120, -8.053, 134.254, -101.804, 80.599, -93.530, -49.859, -109.548, -96.868,
                                87.334, -100.866};
-    insertion_sort(test_array, 50);
+    quicksort(test_array, 0, 49);
 
     int i;
     for (i = 0; i < 50; i++) {

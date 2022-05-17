@@ -25,7 +25,7 @@
 // 数组的划分
 Partition(A, p, q)
     x = A[p]    //选取关键值
-    i = p - 1
+    i = p
     for j = p to q
         if A[j] <= x
             exchange A[i + 1] with A[j]
@@ -34,7 +34,7 @@ Partition(A, p, q)
     return i
 ```
 
-分解的时间消耗为 $\Theta(n)$1
+分解的时间消耗为 $\Theta(n)$
 
 `递归步骤`
 
@@ -46,6 +46,41 @@ Quicksort(A, p, q)
         Quicksort(A, p, r - 1)
         Quicksort(A, r + 1, q)
     return
+```
+
+**[快速排序](./quicksort.c)**
+
+```c
+// 选择第一个元素为主元，将小于等于主元的放到主元左边，其余放到右边
+int partition(DataType array[], int s, int e) {
+    DataType key = array[s];
+    int i = s;
+    DataType tmp;
+    int j;
+    for (j = i + 1; j <= e; j++) {
+        if (array[j] <= key){
+            tmp = array[j];
+            array[j] = array[i+1];
+            array[i+1] = tmp;
+            i++;
+        }
+    }
+    tmp = array[s];
+    array[s] = array[i];
+    array[i] = tmp;
+    return i;
+}
+```
+
+```c
+//改变原数组，参数：array（原数组），s（start），e（end）
+void quicksort(DataType array[], int s, int e) {
+    if (s < e) {
+        int m = partition(array, s, e);
+        quicksort(array, s, m - 1);
+        quicksort(array, m + 1, e);
+    }
+}
 ```
 
 ### 3.1.3 最差的情况与最好的情况
@@ -138,6 +173,47 @@ Randomized_Partition(A, p, r)
 - 没有任何一种序列会产生最差的运行效率。
 
 - 最差的情况由随机数生成器决定。
+
+**[随机化快速排序](./randomized_quicksort.c)**
+
+```c
+// 随机选择主元
+int randomized_partition(DataType array[], int s, int e) {
+    int a;
+    srand((unsigned ) time(NULL));
+    a = rand() % (s - e) + s;
+    DataType tmp = array[s];
+    array[s] = array[a];
+    array[a] = tmp;
+    
+    DataType key = array[s];
+    int i = s;
+    int j;
+    for (j = i + 1; j <= e; j++) {
+        if (array[j] <= key){
+            tmp = array[j];
+            array[j] = array[i+1];
+            array[i+1] = tmp;
+            i++;
+        }
+    }
+    tmp = array[s];
+    array[s] = array[i];
+    array[i] = tmp;
+    return i;
+}
+```
+
+```c
+//改变原数组，参数：array（原数组），s（start），e（end）
+void randomized_quicksort(DataType array[], int s, int e) {
+    if (s < e) {
+        int m = randomized_partition(array, s, e);
+        randomized_quicksort(array, s, m - 1);
+        randomized_quicksort(array, m + 1, e);
+    }
+}
+```
 
 ### 3.2.2 时间消耗计算
 
@@ -277,9 +353,92 @@ $i:j$ 表示如果 $a_{i}\leqslant a_{j}$ 则走左边的路径；否则走右�
 - 左边的子树说明，在 $a_{i}\leqslant a_{j}$ 的情况下，算法要做什么；反之是右边的子树
 - 每个叶节点代表一个序列 $<\pi(1),\pi(2),...,\pi(n)>$，这个序列能保证走完一个决策树后得出的序列满足 $a_{\pi(1)}\leqslant a_{\pi(2)}\leqslant...\leqslant a_{\pi(n)}$
 
-决策树就是把所有可能的结果列出来，它指出了所有可能的路线。
+要认识到的是，对于一个长度为 $n$ 的序列，全排列数量为 $A_{n}^{n}=n!$，因此这不是一个很好的描述排序算法的方式。
 
-但要认识到的是，对于一个长度为 $n$ 的序列，全排列数量为 $A_{n}^{n}=n!$
+但是，决策树能清晰地分析比较排序的过程。
+
+#### 通过决策树模型分析比较排序
+
+任何比较排序都可以写成决策树模型的表示
+
+1. 为每一个n值绘制一颗决策树
+2. 进行比较时，把数分为左子树和右子树两个部分
+3. 决策树将所有的结果列出来，算法终将走到决策树的一个叶节点
+
+每一次排序，对应一条从根节点到唯一一个叶节点的路径；算法的时间消耗等于这条路径的深度。
+
+问题规模为n时，最坏情况运行时间等于树的最长路径也就是树的高度。
+
+**定理**：任意比较排序的决策树的高度的至少是 $\Omega(n\log n)$
+
+证明
+
+前提1：决策树的叶节点的数量至少是 $n!$
+
+前提2：一个高度为 $h$ 的决策树（二叉树）的叶节点数量最大为 $2^h$
+
+因此有
+
+$$n!\leqslant 2^h$$
+
+所以
+
+$$h\geqslant \log n!$$
+
+`斯特林公式`
+
+$$\log n! \geqslant \log (\frac{n}{e})^n$$
+
+因此
+
+$$h\geqslant \log (\frac{n}{e})^n$$
+
+$$h\geqslant n\log (\frac{n}{e})$$
+
+$$h\geqslant n(\log n - \log e)$$
+
+所以
+
+$$h=\Omega(n\log n)$$
+
+可以看出，所有比较排序都至少需要 $\Omega(n\log n)$ 次排序。
+
+**在比较排序算法中，归并排序和堆排序是渐进最优的。**
+
+**随机化快速排序在理想状况下是渐进最优的，即期望最优的。**
+
+### 3.3.3 计数排序（Counting Sort）
+
+输入 $A[1...n]$，其中 $A[i]\in [1,k]\And A[i]\in\Z$
+
+输出 $B[1...n]$，为 $A[1...n]$ 的排序
+
+辅助存储序列 $C[1...k]$
+
+```c
+Counting_Sort:
+    for i = 1 to k
+        C[i] = 0    //将辅助存储序列置0
+    for j = 1 to n
+        C[A[j]]++   //C的第k位存储着A中等于k的元素的数量
+    for i = 2 to k
+        C[i] = C[i] + C[i-1]    //将C的第k位变成储存着A中小于等于k的元素的数量
+    for j = n downto 1
+        B[C[A[j]]] = A[j]       //将A中的元素放在B的正确的位置
+        C[A[j]]--
+```
+
+计数排序的时间消耗为 $O(k+n)$，当 $k<=n$ 时，这个算法运行的非常好。
+
+但计数排序不仅要求所有元素都是整数，还要求元素的大小不超过 $n$，在处理大数据上效率并不尽人意。
+
+#### 稳定排序
+
+如果序列中具有一对大小相等的元素 $a_{1},a_{2}$，在排序后这一对元素的相对位置保持不变，则称该排序算法是稳定的。计数排序是一种稳定排序。
+
+### 3.3.4 基数排序（Radix Sort）
+
+**基本思想**：从低位到高位排序
 
 ---
 
