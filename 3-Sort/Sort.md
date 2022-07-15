@@ -180,7 +180,7 @@ Randomized_Partition(A, p, r)
 // 随机选择主元
 int randomized_partition(DataType array[], int s, int e) {
     int a;
-    srand((unsigned ) time(NULL));
+    srand((unsigned)time(NULL));
     a = rand() % (s - e) + s;
     DataType tmp = array[s];
     array[s] = array[a];
@@ -432,6 +432,30 @@ Counting_Sort:
 
 但计数排序不仅要求所有元素都是整数，还要求元素的大小不超过 $n$，在处理大数据上效率并不尽人意。
 
+**[计数排序](./counting_sort.c)**
+
+```c
+int *counting_sort(const int array[], int length, int max) {
+    int i;
+    int *side_array = (int *) malloc((max + 1) * sizeof(int));
+    int *sorted_array = (int *) malloc(length * sizeof(int));
+    for (i = 0; i < (max + 1); i++) {
+        side_array[i] = 0;
+    }
+    for (i = 0; i < length; i++) {
+        side_array[array[i]]++;
+    }
+    for (i = 1; i < (max + 1); i++) {
+        side_array[i] += side_array[i - 1];
+    }
+    for (i = length - 1; i >= 0; i--){
+        sorted_array[side_array[array[i]] - 1] = array[i];
+        side_array[array[i]]--;
+    }
+    return sorted_array;
+}
+```
+
 #### 稳定排序
 
 如果序列中具有一对大小相等的元素 $a_{1},a_{2}$，在排序后这一对元素的相对位置保持不变，则称该排序算法是稳定的。计数排序是一种稳定排序。
@@ -630,15 +654,3 @@ $$E[T(n)]=O(n)$$
 ### 3.4.3 最坏情况为 O(n) 的选择算法
 
 `太长不看`
-
----
-
----
-
----
-
----
-
----
-
----
