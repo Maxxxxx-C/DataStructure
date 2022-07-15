@@ -28,3 +28,5 @@
 * ### [排序](./3-Sort/Sort.md)
 
 * ### [散列表](./4-Hash-Map/Hash-Map.md)
+
+* ### [二叉搜索树](./5-Binary-Search-Tree/Binary-Search-Tree.md)
