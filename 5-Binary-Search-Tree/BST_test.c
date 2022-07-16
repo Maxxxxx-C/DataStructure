@@ -5,7 +5,7 @@
 #include "stdio.h"
 #include "BST.h"
 
-void insert_test(){
+static void insert_test(){
     printf("\n~~insert testing~~\n");
     BST *tree = create_BST();
     BST_insert(tree, 10);
@@ -23,7 +23,7 @@ void insert_test(){
     printf("\n");
 }
 
-void delete_test(){
+static void delete_test(){
     printf("\n~~delete testing~~\n");
     BST *tree = create_BST();
     BST_insert(tree, 10);

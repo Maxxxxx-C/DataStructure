@@ -245,15 +245,15 @@ Tree-Insert(T, z):
 **[插入](./BST.c)**
 
 ```c
-void BST_insert(BST *tree, DataType data) {
-    BST_Node *node = create_node(data);
+void BST_insert(BST *tree, DataType key) {
+    BST_Node *node = create_node(key);
     if (tree->root == BST_NIL) {
         tree->root = node;
     } else {
         BST_Node *patrol = tree->root;
         BST_Node *patrol_parent;
         while (patrol != BST_NIL) {
-            if (data <= patrol->key) {
+            if (key <= patrol->key) {
                 patrol_parent = patrol;
                 patrol = patrol->left;
             } else {
@@ -262,7 +262,7 @@ void BST_insert(BST *tree, DataType data) {
             }
         }
         node->parent = patrol_parent;
-        if (data <= patrol_parent->key) {
+        if (key <= patrol_parent->key) {
             patrol_parent->left = node;
         } else {
             patrol_parent->right = node;

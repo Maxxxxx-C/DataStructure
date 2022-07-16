@@ -83,8 +83,8 @@ static void replace(BST *tree, BST_Node *replaced, BST_Node *another) {
     }
 }
 
-static BST_Node *minimum(BST_Node *tree_root) {
-    BST_Node *patrol = tree_root;
+static BST_Node *minimum(BST_Node *node) {
+    BST_Node *patrol = node;
     while (patrol->left != BST_NIL) {
         patrol = patrol->left;
     }
@@ -95,8 +95,8 @@ BST_Node *BST_minimum(BST *tree) {
     return minimum(tree->root);
 }
 
-static BST_Node *maximum(BST_Node *tree_root) {
-    BST_Node *patrol = tree_root;
+static BST_Node *maximum(BST_Node *node) {
+    BST_Node *patrol = node;
     while (patrol->right != BST_NIL) {
         patrol = patrol->right;
     }
